@@ -13,16 +13,16 @@ pipeline {
 	    		 SCANNER_HOME = tool 'sonarScanner'
 	  		}
            steps {
-              snDevOpsStep()
-				snDevOpsChange(ignoreErrors: true)
-               withSonarQubeEnv('sonar_cloud') {
-			       sh '${SCANNER_HOME}/bin/sonar-scanner -Dproject.settings=${SCANNER_HOME}/conf/qa-sonar-scanner-cloud.properties'
-		       
-        		}
-	           //withSonarQubeEnv('sonarQube_local') {
-			       //sh '${SCANNER_HOME}/bin/sonar-scanner -Dproject.settings=${SCANNER_HOME}/conf/qa-sonar-scanner.properties'
+             // snDevOpsStep()
+			//	snDevOpsChange(ignoreErrors: true)
+              // withSonarQubeEnv('sonar_cloud') {
+			//       sh '${SCANNER_HOME}/bin/sonar-scanner -Dproject.settings=${SCANNER_HOME}/conf/qa-sonar-scanner-cloud.properties'
 		       
         		//}
+	           withSonarQubeEnv('sonarQube_local') {
+			       sh '${SCANNER_HOME}/bin/sonar-scanner -Dproject.settings=${SCANNER_HOME}/conf/qa-sonar-scanner.properties'
+		       
+        		}
            }
            
        }
